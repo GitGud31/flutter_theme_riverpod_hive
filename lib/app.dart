@@ -65,9 +65,6 @@ class DatabaseService {
     }
   }
 
-  Future<void> toggleSaveTheme(String mode) async {
-    L.log("Got: $mode");
-    await themeBox.put(0, mode);
-    L.log("Saved: ${themeBox.values}");
-  }
+  Future<void> toggleSaveTheme(String mode) async =>
+      await themeBox.put(0, mode);
 }
