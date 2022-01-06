@@ -25,9 +25,7 @@ class HomeScreen extends ConsumerWidget {
           SwitchListTile(
             title: const Text('Dark Theme'),
             value: (mode == 'dark') ? true : false,
-            onChanged: (value) {
-              ref.read(themeController).toggle(value);
-            },
+            onChanged: (value) => ref.watch(themeController).toggle(value),
           ),
         ],
       ),

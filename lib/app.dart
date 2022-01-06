@@ -3,33 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'home_screen.dart';
+import 'log.dart';
 
-//TODO: use L.log(msg); to print stuff
-
-class App extends ConsumerStatefulWidget {
-  const App({Key? key}) : super(key: key);
-
+class App extends ConsumerWidget {
   @override
-  ConsumerState<App> createState() => _AppState();
-}
-
-class _AppState extends ConsumerState<App> {
-  @override
-  void initState() {
-    super.initState();
-
-    ref.read(themeController).loadTheme();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return ProviderScope(
-      child: MaterialApp(
-        theme: (ref.watch(themeController).theme == 'light')
-            ? AppTheme.light
-            : AppTheme.dark,
-        home: const HomeScreen(),
-      ),
+  Widget build(BuildContext context, WidgetRef ref) {
+    return MaterialApp(
+      theme: (ref.watch(themeController).theme == 'light')
+          ? AppTheme.light
+          : AppTheme.dark,
+      home: const HomeScreen(),
     );
   }
 }
@@ -44,62 +27,29 @@ class AppTheme {
 
 //** THEME CONTROLLER */
 final themeController = ChangeNotifierProvider<ThemeController>((ref) {
-  final _service = ref.watch(themeService);
+  final _database = ref.watch(databaseService);
 
-  return ThemeController(_service);
+  return ThemeController(_database);
 });
 
 class ThemeController with ChangeNotifier {
-  ThemeController(this._service);
+  ThemeController(this._database);
 
-  late final ThemeService _service;
+  late final DatabaseService _database;
 
-  String get theme => _service.theme;
-
-  Future<void> loadTheme() async {
-    await _service.openDatabase();
-    _service.fetchTheme();
-
-    notifyListeners();
-  }
+  String get theme => _database.savedTheme;
 
   void toggle(bool mode) {
-    (mode == true) ? _service.toggle("light") : _service.toggle("dark");
+    (mode)
+        ? _database.toggleSaveTheme("dark")
+        : _database.toggleSaveTheme("light");
 
     notifyListeners();
-  }
-}
-
-//** THEME SERVICE */
-final themeService = Provider<ThemeService>((ref) {
-  final _database = ref.watch(databaseService);
-
-  return ThemeService(_database);
-});
-
-class ThemeService {
-  ThemeService(this._database);
-
-  final DatabaseService _database;
-
-  late String _theme;
-
-  String get theme => _theme;
-
-  Future<void> openDatabase() async => await _database.initTheme();
-
-  void fetchTheme() => _theme = _database.savedTheme;
-
-  Future<void> toggle(String theme) async {
-    (theme == 'light') ? _theme = "dark" : _theme = "light";
-
-    _database.toggleSaveTheme(_theme);
   }
 }
 
 //** DATABASE CLASS */
-final databaseService =
-    StateProvider<DatabaseService>((_) => DatabaseService());
+final databaseService = Provider<DatabaseService>((_) => DatabaseService());
 
 class DatabaseService {
   late final Box<String> themeBox;
@@ -115,6 +65,9 @@ class DatabaseService {
     }
   }
 
-  Future<void> toggleSaveTheme(String mode) async =>
-      await themeBox.put(0, mode);
+  Future<void> toggleSaveTheme(String mode) async {
+    L.log("Got: $mode");
+    await themeBox.put(0, mode);
+    L.log("Saved: ${themeBox.values}");
+  }
 }

@@ -3,17 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
-import 'log.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
+  final _databaseService = DatabaseService();
+  await _databaseService.initTheme();
+
   runApp(
     ProviderScope(
-      observers: [ProvidersLogger()],
-      child: const App(),
+      //observers: [ProvidersLogger()],
+      overrides: [
+        databaseService.overrideWithValue(_databaseService),
+      ],
+      child: App(),
     ),
   );
 }
-
