@@ -12,20 +12,20 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Dummy app'),
+        title: const Text('Riverpod - Hive'),
         centerTitle: true,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Center(
-            child: Text('Screen'),
-          ),
+          const Center(child: Text('Some text')),
+          const SizedBox(height: 100),
           SwitchListTile(
             title: const Text('Dark Theme'),
             value: (mode == 'dark') ? true : false,
-            onChanged: (value) => ref.watch(themeController).toggle(value),
+            onChanged: (value) =>
+                ref.watch(themeController.notifier).toggle(value),
           ),
         ],
       ),

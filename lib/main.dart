@@ -4,6 +4,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
 
+//TODO: Use L.log(...) to log stuff.
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
@@ -17,7 +19,7 @@ void main() async {
       overrides: [
         databaseService.overrideWithValue(_databaseService),
       ],
-      child: App(),
+      child: const App(),
     ),
   );
 }

@@ -3,26 +3,19 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 import 'home_screen.dart';
-import 'log.dart';
 
 class App extends ConsumerWidget {
+  const App({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final mode = ref.watch(themeController).theme;
+
     return MaterialApp(
-      theme: (ref.watch(themeController).theme == 'light')
-          ? AppTheme.light
-          : AppTheme.dark,
+      theme: (mode == 'dark') ? ThemeData.dark() : ThemeData.light(),
       home: const HomeScreen(),
     );
   }
-}
-
-//** THEME CLASS */
-class AppTheme {
-  AppTheme._();
-
-  static ThemeData light = ThemeData.light();
-  static ThemeData dark = ThemeData.dark();
 }
 
 //** THEME CONTROLLER */

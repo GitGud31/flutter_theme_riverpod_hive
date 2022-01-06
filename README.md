@@ -1,6 +1,15 @@
-# dummy_app
+# Theme_Riverpod_Hive
 
-A new Flutter project.
+A dummy app to showcase how to integrate [Flutter Hive database](https://pub.dev/packages/hive_flutter) with [Riverpod](https://pub.dev/packages/riverpod).
+
+## Example chosen & App features
+ - Save and persist Theme mode in the database.
+ - Load persisted theme from the database on the next app launch.
+ - Change theme dynamically.
+
+## Misc
+- Give it a 🌟 if you find this useful.
+- Feel free to report an issue if you find one.
 
 ## Getting Started
 
