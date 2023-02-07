@@ -2,6 +2,19 @@
 
 A dummy app to showcase how to integrate [Flutter Hive database](https://pub.dev/packages/hive_flutter) with [Riverpod](https://pub.dev/packages/riverpod).
 
+## Versions:
+
+flutter_riverpod ***^2.1.3***
+
+Kotlin version ***ext.kotlin_version = '1.7.0'***
+
+Gradle ***classpath "com.android.tools.build:gradle:7.1.3"***
+
+Flutter ***3.3.10***
+
+Dart ***2.18.6***
+
+
 ## Example chosen & App features
  - Save and persist Theme mode in the database.
  - Load persisted theme from the database on the next app launch.

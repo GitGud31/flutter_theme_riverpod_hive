@@ -20,9 +20,9 @@ class App extends ConsumerWidget {
 
 //** THEME CONTROLLER */
 final themeController = ChangeNotifierProvider<ThemeController>((ref) {
-  final _database = ref.watch(databaseService);
+  final database = ref.watch(databaseService);
 
-  return ThemeController(_database);
+  return ThemeController(database);
 });
 
 class ThemeController with ChangeNotifier {

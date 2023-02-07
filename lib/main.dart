@@ -10,14 +10,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
-  final _databaseService = DatabaseService();
-  await _databaseService.initTheme();
+  final dbService = DatabaseService();
+  await dbService.initTheme();
 
   runApp(
     ProviderScope(
       //observers: [ProvidersLogger()],
       overrides: [
-        databaseService.overrideWithValue(_databaseService),
+        databaseService.overrideWith((_) => dbService),
       ],
       child: const App(),
     ),

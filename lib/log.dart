@@ -3,8 +3,8 @@ import 'package:logger/logger.dart';
 
 class L {
   static void log(dynamic msg) {
-    final Logger _logger = Logger();
-    _logger.log(Level.debug, msg);
+    final Logger logger = Logger();
+    logger.log(Level.debug, msg);
   }
 }
 
@@ -42,14 +42,14 @@ class ProvidersLogger extends ProviderObserver {
   @override
   void didDisposeProvider(
     ProviderBase provider,
-    ProviderContainer containers,
+    ProviderContainer container,
   ) {
     //super.didDisposeProvider(provider, containers);
 
     L.log('''
     {
       "provider": "${provider.name ?? provider.runtimeType}",
-      "containers": "$containers"
+      "containers": "$container"
     }''');
   }
 }
