@@ -12,7 +12,7 @@ dependencies:
     sdk: flutter
   
   cupertino_icons: ^1.0.2
-  flutter_riverpod: ^2.1.3
+  flutter_riverpod: ^2.4.9
   logger: ^1.1.0
   hive_flutter: ^1.1.0
 
