@@ -1,7 +1,6 @@
+import 'package:dummy_app/controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
-import 'app.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,22 +12,27 @@ class HomeScreen extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Riverpod - Hive'),
-        centerTitle: true,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Center(child: Text('Some text')),
-          const SizedBox(height: 100),
-          SwitchListTile(
-            title: const Text('Dark Theme'),
+        actions: [
+          Switch(
             value: (mode == 'dark') ? true : false,
             onChanged: (value) =>
-                ref.watch(themeController.notifier).toggle(value),
+                ref.read(themeController.notifier).toggle(value),
           ),
         ],
       ),
+      body: Center(
+          child: RichText(
+        text: TextSpan(
+          text: 'Current theme mode ',
+          style: const TextStyle(fontSize: 20),
+          children: <TextSpan>[
+            TextSpan(
+              text: mode,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 25),
+            ),
+          ],
+        ),
+      )),
     );
   }
 }

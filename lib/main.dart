@@ -1,3 +1,4 @@
+import 'package:dummy_app/services/database_service.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -10,8 +11,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
 
-  final dbService = DatabaseService();
-  await dbService.initTheme();
+  final themeService = ThemeService();
+  await themeService.initTheme();
 
   runApp(
     ProviderScope(
@@ -19,7 +20,7 @@ void main() async {
       //** uncomment this, to log your providers changes */
       //observers: [ProvidersLogger()],
       overrides: [
-        databaseService.overrideWith((_) => dbService),
+        themeServiceProvider.overrideWith((_) => themeService),
       ],
       child: const App(),
     ),
