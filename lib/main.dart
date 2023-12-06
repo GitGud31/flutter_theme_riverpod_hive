@@ -4,7 +4,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 
 import 'app.dart';
 
-//TODO: Use L.log(...) to log stuff.
+//** Use L.log(...) for better logging */
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,6 +15,8 @@ void main() async {
 
   runApp(
     ProviderScope(
+
+      //** uncomment this, to log your providers changes */
       //observers: [ProvidersLogger()],
       overrides: [
         databaseService.overrideWith((_) => dbService),
