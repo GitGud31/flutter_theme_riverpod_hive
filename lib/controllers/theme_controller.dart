@@ -8,6 +8,9 @@ final themeController =
 class ThemeController extends AsyncNotifier<String> {
   @override
   Future<String> build() async {
+    ///** uncomment this line to simulate slow loading. */
+    //await Future.delayed(const Duration(milliseconds: 1000));
+
     return await ref.read(themeServiceProvider).initTheme();
   }
 

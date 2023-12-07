@@ -16,9 +16,9 @@ void main() async {
   await Hive.initFlutter();
 
   //** uncomment this if you want to simulate FIRST TIME, on every hotRestart */
-  if (kDebugMode) {
-    await Hive.deleteBoxFromDisk(themeBoxKey);
-  }
+  // if (kDebugMode) {
+  //   await Hive.deleteBoxFromDisk(themeBoxKey);
+  // }
 
   runApp(
     ProviderScope(
