@@ -1,18 +1,30 @@
 # Theme_Riverpod_Hive
 
-A dummy app to showcase how to integrate [Flutter Hive database](https://pub.dev/packages/hive_flutter) with [Riverpod](https://pub.dev/packages/riverpod).
+<img src="./showcase/dark.png" width="150">
+<img src="./showcase/light.png" width="150">
 
-## Versions:
+<br/>
 
-flutter_riverpod ***^2.1.3***
+A Sample app to showcase how to integrate [Flutter Hive database](https://pub.dev/packages/hive_flutter) with [Riverpod](https://pub.dev/packages/riverpod), following best practices.
 
-Kotlin version ***ext.kotlin_version = '1.7.0'***
+By default the selected theme mode is 'Light'.
 
-Gradle ***classpath "com.android.tools.build:gradle:7.1.3"***
+If you want clear the ***saved theme mode*** uncomment this line (in main.dart):
 
-Flutter ***3.3.10***
+```
+if (kDebugMode) {
+   await Hive.deleteBoxFromDisk(themeBoxKey);
+}
+```
 
-Dart ***2.18.6***
+## Versions
+
+* flutter_riverpod ***^2.4.9***
+* hive_flutter  ***^1.1.0***
+* Kotlin version ***ext.kotlin_version = '1.7.0'***
+* Gradle ***classpath "com.android.tools.build:gradle:7.1.3"***
+* Flutter ***3.16.2***
+* Dart ***3.2.2***
 
 
 ## Example chosen & App features
@@ -23,16 +35,3 @@ Dart ***2.18.6***
 ## Misc
 - Give it a 🌟 if you find this useful.
 - Feel free to report an issue if you find one.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
