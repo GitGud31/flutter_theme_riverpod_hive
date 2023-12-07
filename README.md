@@ -16,6 +16,12 @@ if (kDebugMode) {
 }
 ```
 
+If you want to simulate ***a slow loading*** uncomment this line (in theme_controller.dart):
+
+```
+await Future.delayed(const Duration(milliseconds: 1000));
+```
+
 ## Versions
 
 * flutter_riverpod ***^2.4.9***
