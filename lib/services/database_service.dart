@@ -1,4 +1,5 @@
 //** DATABASE CLASS */
+import 'package:dummy_app/consts.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
@@ -7,15 +8,15 @@ final themeServiceProvider = Provider<ThemeService>((_) => ThemeService());
 class ThemeService {
   late final Box<String> themeBox;
 
-  String get savedTheme => themeBox.values.first;
+  Future<String> initTheme() async {
+    themeBox = await Hive.openBox<String>(themeBoxKey);
 
-  Future<void> initTheme() async {
-    await Hive.openBox<String>('theme').then((value) => themeBox = value);
+    // First time loading.
+    // Set 'light' mode as the default.
+    if (themeBox.values.isEmpty) themeBox.add(lightMode);
 
-    //first time loading
-    if (themeBox.values.isEmpty) themeBox.add('light');
+    return themeBox.values.first;
   }
 
-  Future<void> toggleSaveTheme(String mode) async =>
-      await themeBox.put(0, mode);
+  Future<void> toggleTheme(String mode) async => await themeBox.put(0, mode);
 }

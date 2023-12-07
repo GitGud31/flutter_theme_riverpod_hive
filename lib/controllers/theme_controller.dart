@@ -1,25 +1,28 @@
+import 'package:dummy_app/consts.dart';
 import 'package:dummy_app/services/database_service.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final themeController = ChangeNotifierProvider<ThemeController>((ref) {
-  final themeService = ref.watch(themeServiceProvider);
+final themeController =
+    AsyncNotifierProvider<ThemeController, String>(() => ThemeController());
 
-  return ThemeController(themeService);
-});
+class ThemeController extends AsyncNotifier<String> {
+  @override
+  Future<String> build() async {
+    return await ref.read(themeServiceProvider).initTheme();
+  }
 
-class ThemeController with ChangeNotifier {
-  ThemeController(this._themeService);
+  String get currentMode => state.value ?? lightMode;
 
-  late final ThemeService _themeService;
+  void toggle(bool isDarkMode) async {
+    state = const AsyncValue.loading();
 
-  String get theme => _themeService.savedTheme;
+    final mode = isDarkMode ? darkMode : lightMode;
+    state = await AsyncValue.guard(
+      () async {
+        ref.read(themeServiceProvider).toggleTheme(mode);
 
-  void toggle(bool mode) {
-    (mode)
-        ? _themeService.toggleSaveTheme("dark")
-        : _themeService.toggleSaveTheme("light");
-
-    notifyListeners();
+        return mode;
+      },
+    );
   }
 }
