@@ -1,7 +1,6 @@
 # Theme_Riverpod_Hive
 
-<img src="./showcase/dark.png" width="150">
-<img src="./showcase/light.png" width="150">
+<img src="./showcase/dark.png" width="150"> <img src="./showcase/light.png" width="150">
 
 <br/>
 
